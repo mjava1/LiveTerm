@@ -25,7 +25,7 @@ Type 'sumfetch' to display summary.
 
 
 export const login = async (args: string[]): Promise<string> => {
-  console.info('args ' + args[0])
+  // console.info('args ' + args[0])
   if(args[0] === 'false')
     return `Failed to connect to Phantom Wallet. Please make sure it is installed.`
   else

@@ -53,12 +53,12 @@ export const Input = ({
             await connect();
             
             
-            console.info('Connected: ' + connected)
+            // console.info('Connected: ' + connected)
             // Optionally sign a message after connecting
             if (publicKey) {
               const message = new TextEncoder().encode("Please sign this message to log in.");
               const signature = await signMessage(message);
-              console.log("Signature:", signature);
+              // console.log("Signature:", signature);
               // Handle login logic here, possibly sending signature to your backend for verification
             }
 
@@ -66,7 +66,7 @@ export const Input = ({
 
           } catch (error) {
             
-            console.error("Failed to connect to Phantom Wallet:", error);
+            // console.error("Failed to connect to Phantom Wallet:", error);
             command = 'login false'
           }
      
