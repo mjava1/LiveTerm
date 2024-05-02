@@ -16,7 +16,6 @@ export const Input = ({
   setHistory,
   setLastCommandIndex,
   clearHistory,
-  router,
 }) => {
 
   const { publicKey, connect, connected, wallet, select, signMessage} = useWallet();
