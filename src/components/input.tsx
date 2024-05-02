@@ -1,8 +1,10 @@
 import React from 'react';
+import { useWallet } from '@solana/wallet-adapter-react';
 import { commandExists } from '../utils/commandExists';
 import { shell } from '../utils/shell';
 import { handleTabCompletion } from '../utils/tabCompletion';
 import { Ps1 } from './Ps1';
+import { PhantomWalletName } from "@solana/wallet-adapter-phantom";
 
 export const Input = ({
   inputRef,
@@ -14,16 +16,22 @@ export const Input = ({
   setHistory,
   setLastCommandIndex,
   clearHistory,
+  router,
 }) => {
+
+  const { publicKey, connect, connected, wallet, select, signMessage} = useWallet();
+  select(PhantomWalletName);
+
+
   const onSubmit = async (event: React.KeyboardEvent<HTMLInputElement>) => {
-    const commands: [string] = history
+    const commands: string[] = history
       .map(({ command }) => command)
       .filter((command: string) => command);
 
     if (event.key === 'c' && event.ctrlKey) {
       event.preventDefault();
       setCommand('');
-      setHistory('');
+      setHistory([]);
       setLastCommandIndex(0);
     }
 
@@ -40,6 +48,30 @@ export const Input = ({
     if (event.key === 'Enter' || event.code === '13') {
       event.preventDefault();
       setLastCommandIndex(0);
+      if (command.toLowerCase() === 'login') {
+        
+          try {
+            await connect();
+            
+            
+            console.info('Connected: ' + connected)
+            // Optionally sign a message after connecting
+            if (publicKey) {
+              const message = new TextEncoder().encode("Please sign this message to log in.");
+              const signature = await signMessage(message);
+              console.log("Signature:", signature);
+              // Handle login logic here, possibly sending signature to your backend for verification
+            }
+
+            command = `login ${publicKey}`
+
+          } catch (error) {
+            
+            console.error("Failed to connect to Phantom Wallet:", error);
+            command = 'login false'
+          }
+     
+      } 
       await shell(command, setHistory, clearHistory, setCommand);
       containerRef.current.scrollTo(0, containerRef.current.scrollHeight);
     }
@@ -79,11 +111,18 @@ export const Input = ({
   };
 
   return (
+
+    
     <div className="flex flex-row space-x-2">
       <label htmlFor="prompt" className="flex-shrink">
         <Ps1 />
       </label>
 
+      <div>
+   
+      {/* Rest of your input component */}
+    </div>
+    
       <input
         ref={inputRef}
         id="prompt"
@@ -100,6 +139,7 @@ export const Input = ({
         autoComplete="off"
         spellCheck="false"
       />
+      
     </div>
   );
 };

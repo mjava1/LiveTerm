@@ -3,6 +3,7 @@
 import * as bin from './index';
 import config from '../../../config.json';
 
+
 // Help
 export const help = async (args: string[]): Promise<string> => {
   const commands = Object.keys(bin).sort().join(', ');
@@ -21,6 +22,17 @@ export const help = async (args: string[]): Promise<string> => {
 Type 'sumfetch' to display summary.
 `;
 };
+
+
+export const login = async (args: string[]): Promise<string> => {
+  console.info('args ' + args[0])
+  if(args[0] === 'false')
+    return `Failed to connect to Phantom Wallet. Please make sure it is installed.`
+  else
+    //return `Welcome (${args[0]})`
+    return `Welcome !`
+};
+
 
 // Redirection
 export const repo = async (args: string[]): Promise<string> => {
