@@ -34,11 +34,13 @@ export const login = async (args: string[]): Promise<string> => {
 };
 
 
-// Redirection
-export const repo = async (args: string[]): Promise<string> => {
-  window.open(`${config.repo}`);
-  return 'Opening Github repository...';
-};
+// // Buy
+// export const buy = async (args: string[]): Promise<string> => {
+//   // window.open(`${config.repo}`);
+
+  
+//   return 'Buy corvus coin...';
+// };
 
 // About
 export const about = async (args: string[]): Promise<string> => {
