@@ -74,7 +74,7 @@ async function transferUSDC(signTransaction, setHistory, fromWalletAddress, amou
   
   setHistory(`Transaction successful with signature: (${signature})`)
 
-  console.log('Confirmation status:', confirmationResult.value);
+  //sconsole.log('Confirmation status:', confirmationResult.value);
 
   
   //await connection.confirmTransaction(signature, "finalized");
