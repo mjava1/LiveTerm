@@ -133,7 +133,7 @@ export const Input = ({
           await connect();
           
           if(publicKey){
-            console.info(`Wallet address is (${publicKey})`);
+            //console.info(`Wallet address is (${publicKey})`);
             setHistory(`Transferring from Wallet address is (${publicKey})`)
 
             await transferUSDC(signTransaction, setHistory, publicKey, 1)  // Transfer 1 USDC
