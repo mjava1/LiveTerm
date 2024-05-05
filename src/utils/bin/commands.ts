@@ -34,6 +34,15 @@ export const login = async (args: string[]): Promise<string> => {
 };
 
 
+export const buy = async (args: string[]): Promise<string> => {
+  // console.info('args ' + args[0])
+  if(args[0] === 'false')
+    return `Failed to connect to Phantom Wallet. Please make sure it is installed.`
+  else
+    //return `Welcome (${args[0]})`
+    return `Bought Corvus Coin !`
+};
+
 // // Buy
 // export const buy = async (args: string[]): Promise<string> => {
 //   // window.open(`${config.repo}`);
