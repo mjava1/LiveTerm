@@ -21,7 +21,7 @@ const checktrans = async (args: string[]): Promise<string> => {
             const transaction = await connection.getConfirmedTransaction(signatureInfo.signature, 'finalized');
             if (transaction && transaction.transaction) {
                 // Analyze the transaction to see if it meets the criteria (e.g., correct amount, correct token)                console.log(`$transaction`)
-                console.log(`${transaction.transaction}`)
+                //console.log(`${transaction.transaction}`)
             }
         }
     }
